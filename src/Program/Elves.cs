@@ -1,27 +1,80 @@
+using System.Runtime.CompilerServices;
+
 namespace RoleplayGame;
+//Todos los nombres que empiezan con ( _ ), fueron refactorizados por recomendación de Rider
 
 public class Elves
 {
-    public string Name { get; set; }
-    public int Life { get; set; }
-    private int Magic { get; set; }
+    //Establezco los atributos básicos
+    public string Name { get; }
 
-    public List<item> Elements { get; set; }
-    public Elves (string nombre, int vida, int magia, List<item> inventario)
+    private static int _maxLife = 100;
+
+    private static int _maxMagic = 80;
+
+    private int _attack = 5;
+
+    private int _defense = 10;
+
+    public int Magic = _maxMagic;
+
+    public int Life = _maxLife;
+
+    private List<Item> _items = new List<Item>();
+    
+    public  Elves (string name)
     {
-        Name = nombre;
-        Life = vida;
-        Magic = magia;
-        Elements = inventario;
+        Name = name;
+        
     }
 
-    public void AddElemento(Item item)
+    public int GetAttack() //Calcula el ataque total, al sumar los datos de los items agregados
     {
-        inventario.Add(item);
+        foreach (Item objeto in _items)
+        {
+            _attack += objeto.Attack;
+        }
+
+        return _attack;
     }
 
-    public void SubsElemento(Item item)
+    public int GetDefense() //Calcula la defensa total, al sumar los datos de los items agregados
     {
-        inventario.Pop(item);
+        foreach (Item objeto in _items)
+        {
+            _defense += objeto.Defense;
+        }
+
+        return _defense;
     }
+
+    public int RecieveAttack(int ataque) //Calcula, desde cada personaje, el ataque que se les inflige
+    {
+        return Life -= ataque + GetDefense();
+    }
+
+    public void Heal() //Atributo innato exclusivo de elfos y magos
+    {
+        Life += _maxLife / 2;
+        foreach (Item objeto in _items)
+        {
+            Life += objeto.Healing;
+        }
+
+        if (Life > _maxLife) //Corroboro que no se exceda de la máxima vida establecida
+        {
+            Life = _maxLife;
+        }
+    }
+
+    public void AddItem(Item objeto)
+    {
+        _items.Add(objeto);
+    }
+    
+    public void RemoveItem(Item objeto)
+    {
+        _items.Remove(objeto);
+    }
+    
 }
