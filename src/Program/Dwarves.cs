@@ -48,12 +48,10 @@ public class Dwarve
 
     public void Heal()
     {
-        Life += MaxLife / 2;
         foreach (Item objeto in Items)
         {
             Life += objeto.Healing;
         }
-
     }
 
     public void AddItem(Item objeto)
