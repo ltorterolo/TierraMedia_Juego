@@ -8,7 +8,7 @@ public class Dwarve
 
     private static int MaxLife = 150;
 
-    private int Attack = 75;
+    private int Attack = 40;
 
     private int Defense = 75;
     
