@@ -1,54 +1,67 @@
-﻿namespace RoleplayGame;
+﻿using System.Runtime.CompilerServices;
 
-public class Dwarves
+namespace Program;
+
+public class Dwarve
 {
-    public string name { get; }
-    private int MaxLife = 150;
-    private int Life = 150;
-    
-    private int Attack = 50;
+    public string Name { get; }
+
+    private static int MaxLife = 150;
+
+    private int Attack = 75;
+
     private int Defense = 75;
     
+    public int Life = MaxLife;
+
     private List<Item> Items = new List<Item>();
-    
+
+    public  Dwarve (string name)
+    {
+        Name = name;
+    }
+
     public int getAttack()
     {
         foreach (Item objeto in Items)
         {
-            Attack += Item.Attack();
+            Attack += objeto.Attack;
         }
 
         return Attack;
     }
+
     public int getDefense()
     {
         foreach (Item objeto in Items)
         {
-            Defense += Item.Defense();
+            Defense += objeto.Defense;
         }
 
         return Defense;
     }
 
-    public int reciveAttack(int ataque)
+    public int RecieveAttack(int ataque)
     {
         return Life -= ataque + getDefense();
     }
 
-    public void heal()
+    public void Heal()
     {
         Life += MaxLife / 2;
         foreach (Item objeto in Items)
         {
-            Life += Item.Healing();
+            Life += objeto.Healing;
         }
+
     }
-    public void addItem(Item objeto)
+
+    public void AddItem(Item objeto)
     {
         Items.Add(objeto);
     }
 
-    public void removeItem(Item objeto)
+    public void RemoveItem(Item objeto)
     {
         Items.Remove(objeto);
     }
