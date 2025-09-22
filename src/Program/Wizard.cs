@@ -10,7 +10,7 @@ public class Wizard
 
     private static int MaxMagic = 100;
 
-    private int Attack = 10;
+    private int Attack = 50;
 
     private int Defense = 5;
 
@@ -18,7 +18,7 @@ public class Wizard
 
     public int Life = MaxLife;
 
-    private List<Item> Items = new List<Item>();
+    public List<Item> Items = new List<Item>();
     
     public  Wizard (string name)
     {
@@ -28,9 +28,16 @@ public class Wizard
 
     public int getAttack()
     {
+        
         foreach (Item objeto in Items)
         {
             Attack += objeto.Attack;
+        }
+
+        if (Magic >= 5)
+        {
+            Attack += Grimoire.getAttack();
+            Magic -= 5;
         }
 
         return Attack;
@@ -42,26 +49,33 @@ public class Wizard
         {
             Defense += objeto.Defense;
         }
-
+        if (Magic >= 5)
+        {
+            Defense += Grimoire.getDefense();
+            Magic -= 5;
+        }
         return Defense;
     }
 
     public int RecieveAttack(int ataque)
     {
-        return Life -= ataque + getDefense();
+        return Life -= ataque - getDefense();
     }
 
     public void Heal()
     {
-        if (Magic > 5)
-        Life += MaxLife / 2;
+        if (Magic >= 10)
+        {
+            Life += MaxLife / 2;
+            Life += Grimoire.gethealing();
+            Magic -= 10;
+        }
+
         foreach (Item objeto in Items)
         {
             Life += objeto.Healing;
         }
-
-        Magic -= 5;
-
+        
     }
 
     public void AddItem(Item objeto)

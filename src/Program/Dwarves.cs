@@ -1,38 +1,32 @@
-using System.Runtime.CompilerServices;
+﻿namespace Program;
 
-namespace Program;
-//Todos los nombres que empiezan con ( _ ), fueron refactorizados por recomendación de Rider
-
-public class Elves
+public class Dwarve
 {
-    //Establezco los atributos básicos
     public string Name { get; }
 
-    private static int _maxLife = 100;
+    private static int _maxLife = 120;
 
-    private static int _maxMagic = 80;
-
-    private int _attack = 5;
-
-    private int _defense = 10;
-
-    public int Magic = _maxMagic;
-
+    // Ataque y defensa base 
+    private int _attack = 40;
+    private int _defense = 75;
+    
     public int Life = _maxLife;
 
-    private List<Item> _items = new List<Item>();
-    
-    public  Elves (string name)
+    // lista de items que tiene el enano
+    public List<Item> Items = new List<Item>();
+
+    // Constructor de Enano
+    public  Dwarve (string name)
     {
         Name = name;
-        
     }
-
-    public int GetAttack() //Calcula el ataque total, al sumar los datos de los items agregados
+    
+    // Calcula los puntos de ataque, sumando los valores de ataque de los items que tiene el personaje
+    public int GetAttack()
     {
         if (Life > 0)
         {
-            foreach (Item objeto in _items)
+            foreach (Item objeto in Items)
             {
                 _attack += objeto.Attack*3/2; 
             } 
@@ -41,12 +35,12 @@ public class Elves
         return 0;
     }
 
-    //Calcula la defensa total, al sumar los datos de los items agregados
+    // Calcula los puntos de defensa, sumando los valores de defensa de los items que tiene el personaje
     public int GetDefense()
     {
         if (Life > 0)
         {
-            foreach (Item objeto in _items)
+            foreach (Item objeto in Items)
             {
                 _defense += objeto.Defense;
             }
@@ -56,6 +50,7 @@ public class Elves
         return 0;
     }
 
+    // Recibe un ataque y ajusta la vida
     public int ReceiveAttack(int ataque)
     {
         Life -= ataque - GetDefense();
@@ -78,15 +73,12 @@ public class Elves
         
     }
 
+    // Cura al enano sumando el "Healing" de cada ítem
     public void Heal()
     {
         if (Life > 0)
         {
-            if (Magic >= 5)
-            {
-                Life += _maxLife / 2;
-            }
-            foreach (Item objeto in _items)
+            foreach (Item objeto in Items)
             {
                 Life += objeto.Healing;
             }
@@ -98,21 +90,23 @@ public class Elves
             }
         }
     }
+
+    // Agrega un ítem a la lista de elementos
     public void AddItem(Item objeto)
     {
         if (Life > 0)
         {
-            _items.Add(objeto);
+            Items.Add(objeto);
         }
     }
-    
+
+    // Saca un ítem de la lista de elementos
     public void RemoveItem(Item objeto)
     {
         if (Life > 0)
         {
 
-            _items.Remove(objeto);
+           Items.Remove(objeto);
         }
     }
-    
 }
