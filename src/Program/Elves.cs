@@ -71,8 +71,6 @@ public class Elves
             {
                 Life = _maxLife;
             }
-
-            
         }
         return Life;
         
