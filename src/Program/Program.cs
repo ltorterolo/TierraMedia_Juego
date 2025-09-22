@@ -4,7 +4,7 @@ public static class juego
 {
     public static void Main()
     {
-        Item Cortauñas = new Item("Cortauñas", 7, 0, 2);
+        Item Cortauñas = new Item("Cortauñas", 7, 0, 10);
         Item bufanda = new Item("Bufanda", 0, 5, 0);
         Wizard pepito = new Wizard("Pepito");
         pepito.AddItem(Cortauñas);

@@ -53,11 +53,14 @@ public class Wizard
 
     public void Heal()
     {
+        if (Magic > 5)
         Life += MaxLife / 2;
         foreach (Item objeto in Items)
         {
             Life += objeto.Healing;
         }
+
+        Magic -= 5;
 
     }
 
@@ -71,9 +74,9 @@ public class Wizard
         Items.Remove(objeto);
     }
 
-    public void ReadGrimoire(int magic)
+    public void ReadGrimoire()
     {
-        if (magic > 10)
+        if (Magic > 10)
         {
             Grimoire.AddSpell();
             Magic -= 10;
