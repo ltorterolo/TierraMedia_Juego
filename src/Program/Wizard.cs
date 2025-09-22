@@ -6,17 +6,17 @@ public class Wizard
 {
     public string Name { get; }
 
-    private static int MaxLife = 50;
+    private static int _maxLife = 50;
 
-    private static int MaxMagic = 100;
+    private static int _maxMagic = 100;
 
-    private int Attack = 50;
+    private int _attack = 50;
 
-    private int Defense = 5;
+    private int _defense = 5;
 
-    public int Magic = MaxMagic;
+    public int Magic = _maxMagic;
 
-    public int Life = MaxLife;
+    public int Life = _maxLife;
 
     public List<Item> Items = new List<Item>();
     
@@ -26,47 +26,75 @@ public class Wizard
         
     }
 
-    public int getAttack()
+    public int GetAttack()
     {
-        
-        foreach (Item objeto in Items)
+        if (Life > 0)
         {
-            Attack += objeto.Attack;
+            foreach (Item objeto in Items)
+            {
+                _attack += objeto.Attack;
+            }
+
+            if (Magic >= 5)
+            {
+                _attack += Grimoire.GetAttack();
+                Magic -= 5;
+            }
+
+            return _attack;
         }
 
-        if (Magic >= 5)
-        {
-            Attack += Grimoire.getAttack();
-            Magic -= 5;
-        }
-
-        return Attack;
+        return 0;
     }
 
-    public int getDefense()
+    public int GetDefense()
     {
-        foreach (Item objeto in Items)
+        if (Life > 0)
         {
-            Defense += objeto.Defense;
+            foreach (Item objeto in Items)
+            {
+                _defense += objeto.Defense;
+            }
+
+            if (Magic >= 5)
+            {
+                _defense += Grimoire.GetDefense();
+                Magic -= 5;
+            }
+
+            return _defense;
         }
-        if (Magic >= 5)
-        {
-            Defense += Grimoire.getDefense();
-            Magic -= 5;
-        }
-        return Defense;
+
+        return 0;
     }
 
     public int RecieveAttack(int ataque)
     {
-        return Life -= ataque - getDefense();
+        Life -= ataque - GetDefense();
+        
+        if (Life <= 0)
+        {
+            Console.WriteLine($"{this.Name} ha muerto :(");
+            Life = 0;
+        }
+        else
+        {
+            if (Life >= _maxLife)
+            {
+                Life = _maxLife;
+            }
+
+            
+        }
+        return Life;
+        
     }
 
     public void Heal()
     {
         if (Magic >= 10)
         {
-            Life += MaxLife / 2;
+            Life += _maxLife / 2;
             Life += Grimoire.gethealing();
             Magic -= 10;
         }
