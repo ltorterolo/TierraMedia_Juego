@@ -1,6 +1,5 @@
 using NUnit.Framework;
-using Program;       // Dwarve, Wizard, Item, Grimoire
-using RoleplayGame;  // Elves
+using Program;       // Dwarve, Wizard, Item, Grimoire, Elves
 
 namespace LibraryTests
 {

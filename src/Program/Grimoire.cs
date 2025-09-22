@@ -2,60 +2,60 @@
 
 public class Grimoire
 {
-    private static int attack = 0;
+    private static int _attack = 0;
     
-    private static int defense = 0;
+    private static int _defense = 0;
     
-    private static int healing = 0;
+    private static int _healing = 0;
         
-    private static List<Spell> spells = new List<Spell>();
+    private static List<Spell> _spells = new List<Spell>();
 
-    private static List<Spell> KnownSpells = new List<Spell>();
+    private static List<Spell> _knownSpells = new List<Spell>();
 
     public static void AddSpell()
     {
         int flag = 1;
-        foreach (var hechizo in spells)
+        foreach (var hechizo in _spells)
         {
-            if (flag > 0 && !KnownSpells.Contains(hechizo))
+            if (flag > 0 && !_knownSpells.Contains(hechizo))
             {
-                KnownSpells.Add(hechizo);
+                _knownSpells.Add(hechizo);
                 flag = 0;
             }
         }
     }
 
-    public static int getAttack()
+    public static int GetAttack()
     {
-        foreach (var hechizo in KnownSpells)
+        foreach (var hechizo in _knownSpells)
         {
-            attack += hechizo.Attack;
+            _attack += hechizo.Attack;
         }
 
-        return attack;
+        return _attack;
     }
-    public static int getDefense()
+    public static int GetDefense()
     {
-        foreach (var hechizo in KnownSpells)
+        foreach (var hechizo in _knownSpells)
         {
-            defense += hechizo.Defense;
+            _defense += hechizo.Defense;
         }
 
-        return defense;
+        return _defense;
     }
     public static int gethealing()
     {
-        foreach (var hechizo in KnownSpells)
+        foreach (var hechizo in _knownSpells)
         {
-            healing += hechizo.Healing;
+            _healing += hechizo.Healing;
         }
 
-        return healing;
+        return _healing;
     }
     
 
     public static void SetSpells(Spell hechizo)
     {
-        spells.Add(hechizo);
+        _spells.Add(hechizo);
     }
 }
