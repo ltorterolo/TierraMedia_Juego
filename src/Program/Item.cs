@@ -7,7 +7,7 @@ public class Item
     
     public int Defense { get; }
     
-    public int Healing { get; }
+    public int Healing { get; set; }
 
     public Item (String name, int attack, int defense, int healing)
     {

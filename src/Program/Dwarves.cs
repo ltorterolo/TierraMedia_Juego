@@ -7,8 +7,11 @@ public class Dwarve
     private static int _maxLife = 120;
 
     // Ataque y defensa base 
-    private int _attack = 40;
-    private int _defense = 75;
+    private static int _initialAttack = 40;
+    private int _attack = _initialAttack;
+    private static int _initialDefense = 75;
+    private int _defense = _initialDefense;
+    
     
     public int Life = _maxLife;
 
@@ -26,6 +29,7 @@ public class Dwarve
     {
         if (Life > 0)
         {
+            _attack = _initialAttack;
             foreach (Item objeto in Items)
             {
                 _attack += objeto.Attack*3/2; 
@@ -40,6 +44,7 @@ public class Dwarve
     {
         if (Life > 0)
         {
+            _defense = _initialDefense;
             foreach (Item objeto in Items)
             {
                 _defense += objeto.Defense;

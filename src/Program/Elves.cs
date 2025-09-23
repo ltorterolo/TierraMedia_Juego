@@ -12,32 +12,36 @@ public class Elves
 
     private static int _maxMagic = 80;
 
-    private int _attack = 5;
-
-    private int _defense = 10;
+    private static int _initialAttack = 10;
+    private int _attack = _initialAttack;
+    private static int _initialDefense = 20;
+    private int _defense = _initialDefense;
 
     public int Magic = _maxMagic;
 
     public int Life = _maxLife;
 
     private List<Item> _items = new List<Item>();
-    
-    public  Elves (string name)
+
+    public Elves(string name)
     {
         Name = name;
-        
+
     }
 
     public int GetAttack() //Calcula el ataque total, al sumar los datos de los items agregados
     {
         if (Life > 0)
         {
+            _attack = _initialAttack;
             foreach (Item objeto in _items)
             {
-                _attack += objeto.Attack*3/2; 
-            } 
+                _attack += objeto.Attack * 3 / 2;
+            }
+
             return _attack;
         }
+
         return 0;
     }
 
@@ -46,6 +50,7 @@ public class Elves
     {
         if (Life > 0)
         {
+            _defense = _initialDefense;
             foreach (Item objeto in _items)
             {
                 _defense += objeto.Defense;
@@ -53,6 +58,7 @@ public class Elves
 
             return _defense;
         }
+
         return 0;
     }
 

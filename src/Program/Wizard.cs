@@ -10,9 +10,10 @@ public class Wizard
 
     private static int _maxMagic = 100;
 
-    private int _attack = 50;
-
-    private int _defense = 5;
+    private static int _initialAttack = 50;
+    private int _attack = _initialAttack;
+    private static int _initialDefense = 5;
+    private int _defense = _initialDefense;
 
     public int Magic = _maxMagic;
 
@@ -30,6 +31,7 @@ public class Wizard
     {
         if (Life > 0)
         {
+            _attack = _initialAttack;
             foreach (Item objeto in Items)
             {
                 _attack += objeto.Attack;
@@ -51,6 +53,7 @@ public class Wizard
     {
         if (Life > 0)
         {
+            _defense = _initialDefense;
             foreach (Item objeto in Items)
             {
                 _defense += objeto.Defense;
@@ -68,7 +71,7 @@ public class Wizard
         return 0;
     }
 
-    public int RecieveAttack(int ataque)
+    public int ReceiveAttack(int ataque)
     {
         Life -= ataque - GetDefense();
         

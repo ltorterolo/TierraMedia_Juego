@@ -35,6 +35,8 @@ public static class Juego
         juancho.AddItem(almohadon);
         
         Console.WriteLine(juancho.GetAttack());
+        Console.WriteLine(juancho.GetAttack());
+        Console.WriteLine(juancho.GetAttack());
         Console.WriteLine(juancho.GetDefense());
 
         juancho.ReceiveAttack(pepito.GetAttack());

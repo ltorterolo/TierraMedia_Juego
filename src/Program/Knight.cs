@@ -7,8 +7,10 @@ public class Knight
     public int Life = _maxLife; //cambia vida para cada personaje / arranca con el max
 
     // Ataque y defensa base 
-    private int _attack = 20;
-    private int _defense = 80;
+    private static int _initialAttack = 20;
+    private int _attack = _initialAttack;
+    private static int _initialDefense = 80;
+    private int _defense = _initialDefense;
     
     public List<Item> Items = new List<Item>(); // se van agregando los elementos que tiene 
     
@@ -20,6 +22,7 @@ public class Knight
     // Calcula los puntos de ataque, sumando los valores de ataque de los items que tiene el personaje
     public int GetAttack()
     {
+        _attack = _initialAttack;
         if (Life > 0) // chequea que esté vivo
         {
             foreach (Item objeto in Items) // recorre la lista de elementos que tiene el caballero, y se queda con el ataque de cada uno
@@ -35,6 +38,7 @@ public class Knight
     {
         if (Life > 0)
         {
+            _defense = _initialDefense;
             foreach (Item objeto in Items) // lo mimso que el ataque , pero con la defensa
             {
                 _defense += objeto.Defense*3/2; // extra defensa por ser un caballero

@@ -8,9 +8,9 @@ public class Grimoire
     
     private static int _healing = 0;
         
-    private static List<Spell> _spells = new List<Spell>();
+    public static List<Spell> _spells = new List<Spell>();
 
-    private static List<Spell> _knownSpells = new List<Spell>();
+    public static List<Spell> _knownSpells = new List<Spell>();
 
     public static void AddSpell()
     {
@@ -27,6 +27,7 @@ public class Grimoire
 
     public static int GetAttack()
     {
+        _attack = 0;
         foreach (var hechizo in _knownSpells)
         {
             _attack += hechizo.Attack;
@@ -36,6 +37,7 @@ public class Grimoire
     }
     public static int GetDefense()
     {
+        _defense = 0;
         foreach (var hechizo in _knownSpells)
         {
             _defense += hechizo.Defense;
@@ -45,6 +47,7 @@ public class Grimoire
     }
     public static int gethealing()
     {
+        _healing = 0;
         foreach (var hechizo in _knownSpells)
         {
             _healing += hechizo.Healing;
@@ -57,5 +60,19 @@ public class Grimoire
     public static void SetSpells(Spell hechizo)
     {
         _spells.Add(hechizo);
+    }
+    public static int ResetGrimoire()
+    {
+        int total = 0;
+        foreach (var hechizo in Grimoire._spells)
+        {
+            if (Grimoire._knownSpells.Contains(hechizo))
+            {
+                total += 1;
+                Grimoire._knownSpells.Remove(hechizo);
+            }
+        }
+
+        return total;
     }
 }
